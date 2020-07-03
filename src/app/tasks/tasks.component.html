@@ -1,0 +1,21 @@
+<h1>{{ taskListHeading }}</h1>
+<form #f="ngForm" (ngSubmit)="handleSubmit(f)">
+  <mat-form-field appearance="fill">
+    <mat-label>Ej: Sacar la basura...</mat-label>
+    <input matInput [formControl]="taskFormControl" />
+    <mat-error *ngIf="taskFormControl.hasError('required')">
+      Este campo no debe estar vacio
+    </mat-error>
+  </mat-form-field>
+  <button mat-flat-button color="accent" type="submit">
+    Agregar
+  </button>
+</form>
+<mat-selection-list #selectedTasks>
+  <mat-list-option nfIf="tasks.length > 0" *ngFor="let task of tasks">
+    {{ task.title }}
+    <mat-divider></mat-divider>
+  </mat-list-option>
+</mat-selection-list>
+
+<p>Tareas completadas: {{ selectedTasks.selectedOptions.selected.length }}</p>
